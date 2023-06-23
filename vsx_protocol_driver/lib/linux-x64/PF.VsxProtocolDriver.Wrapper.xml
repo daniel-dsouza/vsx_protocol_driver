@@ -1,0 +1,803 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PF.VsxProtocolDriver.Wrapper</name>
+    </assembly>
+    <members>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExports">
+            <summary>
+            Main class for basic operations to export
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ReleaseString(System.IntPtr)">
+            <summary>
+            Release memory of string allocated by a function before.
+            Sets the pointer to zero.
+            </summary>
+            <param name="pString">Reference to string pointer</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.GetLibraryVersion(System.IntPtr)">
+            <summary>
+            Returns the actual library version.
+            PLease free "version" parameter after usage with 'vsx_ReleaseString'
+            </summary>
+            <param name="version">Reference to string pointer</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.GetErrorText(System.Int32,System.IntPtr)">
+            <summary>
+            Return the error text to a given error code.
+            It also appends additional text from last error given.
+            </summary>
+            <param name="error_code">Input error code</param>
+            <param name="error_text">Reference to string pointer</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.InitTcpSensor(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Initialize a new tcp based sensor
+            </summary>
+            <param name="pVsx">Reference to an empty vsx system handle</param>
+            <param name="ipAddress">e.g. 192.168.2.4</param>
+            <param name="pluginName">Additional functionality for special sensors. 
+            E.g. 'SR3D_STEREO' to calculate 3D data from disparity map on target</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.InitSerialSensor(System.IntPtr,System.IntPtr,System.Int32,System.IntPtr,System.Int32,System.IntPtr)">
+            <summary>
+            Inits an instance to communicate with a Vsx-Device via serial protocol.
+            </summary>
+            <param name="pVsx">New handle to sensor</param>
+            <param name="serialPort">The comport of the device.</param>
+            <param name="baudrate">The baudrate of the device.</param>
+            <param name="sensorType">The sensor type of the device.></param>
+            <param name="connectionType">The connection type of the device.</param>
+            <param name="pluginName">The type of the device.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ReleaseSensor(System.IntPtr)">
+            <summary>
+            Frees the given sensor
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ReConnectTcpDevice(System.IntPtr,System.IntPtr)">
+            <summary>
+            Disconnects the device and reconnects with new connection settings.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="ipAddress">The new IPAddress.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ReConnectAndLoginTcpDevice(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Disconnects the device and reconnects with new connection settings and login credentials.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="ipAddress">The new IPAddress.</param>
+            <param name="username">username for login</param>
+            <param name="password">password for login</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ReConnectSerialDevice(System.IntPtr,System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Disconnects the device and reconnects with new connection settings.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="serialPort">The new serial port.</param>
+            <param name="baudrate">The new baudrate.</param>
+            <param name="connectionType">The new connection type.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.Connect(System.IntPtr)">
+            <summary>
+            Connect with the device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ConnectEx(System.IntPtr,System.Int32)">
+            <summary>
+            Connect with the device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="timeout_ms">The timeout for a connection attempt</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ConnectAndLogin(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Connect with the device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="username">username for login</param>
+            <param name="password">password for login</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.ConnectExAndLogin(System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            Connect with the device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="username">username for login</param>
+            <param name="password">password for login</param>
+            <param name="timeout_ms">The timeout for a connection attempt</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.Login(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Login to the device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="username">username for login</param>
+            <param name="password">password for login</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.Logout(System.IntPtr)">
+            <summary>
+            Logout from device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.SetPassword(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Set new password on the device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="authorizationUsername">username for authorization account</param>
+            <param name="authorizationPassword">password for authorization account</param>
+            <param name="username">username for account to set new password</param>
+            <param name="password">password for account</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.GetConnected(System.IntPtr,System.IntPtr)">
+            <summary>
+            Indicates current connection state with the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="result">Pointer to result value (1: connected, 0: disconneted)</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.Disconnect(System.IntPtr)">
+            <summary>
+            Disconnect with the device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.RegisterOnDisconnect(System.IntPtr,System.IntPtr)">
+            <summary>
+            Register callback for "vsx_OnDisconnect" callback.
+            Only short execution times are allowed (do not block the function),
+            just use to transfer data to your (main) thread. 
+            </summary>
+            <param name="vsx">Handle to vsx sensor</param>
+            <param name="fptr">Function pointer to callback function</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.DeregisterOnDisconnect(System.IntPtr)">
+            <summary>
+            Function to deregister already existing callback function
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.RegisterOnSessionMessageReceived(System.IntPtr,System.IntPtr)">
+            <summary>
+            Register callback for "vsx_OnSessionMessageReceived" callback.
+            Only short execution times are allowed (do not block the function),
+            just use to transfer data to your (main) thread. 
+            </summary>
+            <param name="vsx">Handle to vsx sensor</param>
+            <param name="fptr">Function pointer to callback function</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.DeregisterOnSessionMessageReceived(System.IntPtr)">
+            <summary>
+            Function to deregister already existing callback function
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.TestSystem(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Sends a test system command to the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="command">The test system command.</param>
+            <param name="inputValue">Optional input value</param>
+            <param name="outputValue">Return ouput string of function call</param>
+            <param name="status">Returns 1 on sucess and 0 on failure</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.TestSystemEx(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            Sends a test system command to the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="command">The test system command.</param>
+            <param name="inputValue">Optional input value</param>
+            <param name="outputValue">Return ouput string of function call</param>
+            <param name="status">Returns 1 on sucess and 0 on failure</param>
+            <param name="timeout_ms">Wait time for device reply.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.GetWaitTimeout(System.IntPtr,System.IntPtr)">
+            <summary>
+            Gets the time in ms, the driver waits for response from device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="timeout_ms">Time in ms</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.SetWaitTimeout(System.IntPtr,System.Int32)">
+            <summary>
+            Sets the time in ms, the driver waits for response from device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="timeout_ms">Time in ms</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.UploadData(System.IntPtr,System.IntPtr)">
+            <summary>
+            Sends a data file (either image data or dynamic container data) to the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="fileName">The path and filename of the data file.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.SendFirmware(System.IntPtr,System.IntPtr)">
+            <summary>
+            Sends a firmware update file to the device. NOTE: not completely implemented
+            yet, the file is send only to the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="fileName">The path and filename of the firmware file.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.SendXmlDataMessage(System.IntPtr,System.IntPtr)">
+            <summary>
+            Sends a string to the device. 
+            NOTE: function does not wait for any device reply.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="xmlCommand">Command to send</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.SetNetworkSettings(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Sets the network settings of the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="ipAddress">The new IP Address</param>
+            <param name="networkMask">The new network mask</param>
+            <param name="gateway">The new gateway</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExports.SetNetworkSettingsViaUdp(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Sets the network settings of the device identified by the macAddress via UDP.
+            </summary>
+            <param name="macAddress">The macAddress of the device to set</param>
+            <param name="ipAddress">The new IP Address</param>
+            <param name="networkMask">The new network mask</param>
+            <param name="gateway">The new gateway</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer">
+            <summary>
+            Class collecting data container functionality
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ResetDynamicContainerGrabber(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Restarts the internal dynamic container grabber. Saving the items will be new initialized.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="bufferSize">The maximum number of items which will be internally saved, if less than 0, number is infinity.</param>
+            <param name="strategy">The strategy, which items will be discarded if maximum number of items is reached.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetDataContainer(System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            Gets the oldest saved item and removes it internally.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="pDch">New dynamic container handle</param>
+            <param name="timeout_ms">The maximum time in ms to try reading an item.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetCachedContainer(System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            Gets a cached dynamic container.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="pDch">Handle to new generated data container</param>
+            <param name="position">Position of the container in cache.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ReleaseDataContainer(System.IntPtr)">
+            <summary>
+            Release / Free data container
+            </summary>
+            <param name="dch">Handle to data container</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.SaveData(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Saves a VsxMessage to the given filename.
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="tag">Specify which tag from container should be saved</param>
+            <param name="fileName">Path and filename where to save the message.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.Save3DPointCloudData(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Saves a 3D point cloud as pcd to the given filename.
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="point_x_Id">The x image tag name</param>
+            <param name="point_y_Id">The y image tag name</param>
+            <param name="point_z_Id">The z image tag name</param>
+            <param name="fileName">Path and filename where to save the data.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.copyIntoVsxImage(PF.VsxProtocolDriver.Wrapper.VsxImage@,System.Int64,System.Drawing.Bitmap)">
+            <summary>
+            Copies Bitmap image into VsxImage inclusive frame counter.
+            A Bitmap is needed here because compressed images can be received, where as the raw image data pointer 
+            points to compressed image data. These data must be decompressed for further processing this is automatically
+            done by the Bitmap class.
+            </summary>
+            <param name="destImage">destination VsxImage to copy to</param>
+            <param name="frameCounter"> image number</param>
+            <param name="srcImage">source bitmap to copy from</param>
+            <returns></returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetImage(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Get image from a dynamic container, access via raw memory pointer
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="tag">Tag name of image data</param>
+            <param name="imageData">New handle to image object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ReleaseImage(System.IntPtr)">
+            <summary>
+            Release / free image object
+            </summary>
+            <param name="pImage">Handle to image object</param>
+            <returns></returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetLine(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Get line data from a dynamic container
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="tag">Tag name of line data</param>
+            <param name="data">New handle to image object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ReleaseLine(System.IntPtr)">
+            <summary>
+            Release / free line data object
+            </summary>
+            <param name="pLineData">Handle to line data object</param>
+            <returns></returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetDisparityDescriptor2(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Get disparity descriptor from a dynamic container
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="tag">Tag name of data</param>
+            <param name="data">New handle to data object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ReleaseDisparityDescriptor2(System.IntPtr)">
+            <summary>
+            Release / free DisparityDescriptor2 object
+            </summary>
+            <param name="pData">Handle to data object</param>
+            <returns></returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetTransformation(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Get transformation from a dynamic container
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="tag">Tag name of data</param>
+            <param name="data">New handle to data object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ReleaseTransformation(System.IntPtr)">
+            <summary>
+            Release / free Transformation object
+            </summary>
+            <param name="pData">Handle to data object</param>
+            <returns></returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetCaptureInformation(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Get capture information from a dynamic container
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="tag">Tag name of data</param>
+            <param name="data">New handle to data object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ReleaseCaptureInformation(System.IntPtr)">
+            <summary>
+            Release / free CaptureInformation object
+            </summary>
+            <param name="pData">Handle to data object</param>
+            <returns></returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetTagList(System.IntPtr,System.IntPtr)">
+            <summary>
+            Returns all available tags from a dynamic container
+            </summary>
+            <param name="dch">Handle to dynamic container</param>
+            <param name="tagList">New handle to tag list object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.ReleaseTagList(System.IntPtr)">
+            <summary>
+            Relase / free release tag list object
+            </summary>
+            <param name="pTagList">handle to tag list object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetMissingContainerFramesCounter(System.IntPtr,System.IntPtr)">
+            <summary>
+            Gets the missing frame counter for image grabbing
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="result">Pointer to result value</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetDynamicContainerQueueSize(System.IntPtr,System.IntPtr)">
+            <summary>
+            Gets the current size of the dynamic container message queue
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="result">Pointer to result value</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDataContainer.GetNumberOfCachedContainers(System.IntPtr,System.IntPtr)">
+            <summary>
+            Gets the current number of cached container messages
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="result">Pointer to result value</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExportsDevice">
+            <summary>
+            Class collecting device functionality
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDevice.GetDeviceInformation(System.IntPtr,System.IntPtr)">
+            <summary>
+            Returns a device object with network informations about the current device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="deviceData">New handle to device data object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDevice.ReleaseDevice(System.IntPtr)">
+            <summary>
+            Release / Free existing handle to device object
+            </summary>
+            <param name="pDevice">Handle to existing device obeject</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDevice.GetUdpDeviceList(System.IntPtr)">
+            <summary>
+            Searches for all devices in a subnet via udp and returns a list with all devices found.
+            </summary>
+            <param name="deviceListData">New handle to device list object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsDevice.ReleaseDeviceList(System.IntPtr)">
+            <summary>
+            Release / Free existing handle to device list object
+            </summary>
+            <param name="pDeviceList">Handle to existing device list object</param>
+            <returns></returns>
+        </member>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExportsLog">
+            <summary>
+            Class collecting log functionality
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsLog.ResetLogMessageGrabber(System.IntPtr,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Starts the internal log message grabber. Saving the items will be new initialized.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="bufferSize">The maximum number of items which will be internally saved, if less than 0, number
+            is infinity.</param>
+            <param name="typeMask">Mask which log message types will be send by device.</param>
+            <param name="strategy">The strategy, which items will be discarded if maximum number of items is reached.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsLog.GetLogMessage(System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            Gets the oldest saved item and removes it internally.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="log">New handle to string list</param>
+            <param name="timeout_ms">The maximum time in ms to try reading an item.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsLog.GetLogMessageQueueSize(System.IntPtr,System.IntPtr)">
+            <summary>
+            Gets the current size of the log message queue
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="result">Pointer to result value</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsLog.GetMissingLogMessagesCounter(System.IntPtr,System.IntPtr)">
+            <summary>
+            Gets the missing log messages counter for log message grabbing
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="result">Pointer to result value</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter">
+            <summary>
+            Class collecting parameter functionality
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter.SetSingleParameterValue(System.IntPtr,System.UInt32,System.IntPtr,System.UInt32,System.IntPtr,System.IntPtr)">
+            <summary>
+             Sets the parameter to a value on the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="settingsVersion">The settings version of the parameter which should be set.</param>
+            <param name="configurationId">The config id of the parameter which should be set.</param>
+            <param name="configurationVersion">The config version of the parameter which should be set.</param>
+            <param name="parameterId">The id of the parameter which should be set.</param>
+            <param name="value">Value as string (floating number must be formatted with dot separation)</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter.GetSingleParameterValue(System.IntPtr,System.UInt32,System.IntPtr,System.UInt32,System.IntPtr,System.IntPtr)">
+            <summary>
+            Returns the current value of the given parameter from device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="settingsVersion">The settings version of the parameter its value is asked for.</param>
+            <param name="configurationId">The config id of the parameter its value is asked for.</param>
+            <param name="configurationVersion">The config version of the parameter its value is asked for.</param>
+            <param name="parameterId">The id of the parameter its value is asked for.</param>
+            <param name="value">Returns value in string reprasentation</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter.LoadDefaultParameterSetOnDevice(System.IntPtr)">
+            <summary>
+            Resets the devices parameters to factory settings and returns a list of the complete
+            parameter set of the device including current values.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter.LoadParameterSetOnDevice(System.IntPtr)">
+            <summary>
+            Loads the parameter set saved on device and returns a list of the complete parameter
+            set of the device including current values.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter.SaveParameterSetOnDevice(System.IntPtr)">
+            <summary>
+            Saves the current parameter set on device. Parameter values will be loaded when
+            device starts.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter.UploadParameterSet(System.IntPtr,System.IntPtr)">
+            <summary>
+            Uploads a parameter file to the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="fileName">Path and filename to upload.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameter.DownloadParameterSet(System.IntPtr,System.IntPtr)">
+            <summary>
+            Save the current parameter set to a file.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="fileName">Path and file name to save to.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList">
+            <summary>
+            Class collecting parameter list functionality
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.GetParameterList(System.IntPtr,System.IntPtr)">
+            <summary>
+            Returns a list of the complete parameter set of the device including their current
+            values. The list shows the current state of the parameters.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="parameterListData">New handle to parameter list data object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.UploadParameterList(System.IntPtr,System.IntPtr)">
+            <summary>
+            Uploads a parameter list to the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="parameterListData">Existing handle to parameter list data object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.SetSingleParameterString(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Sets the parameter to a value on the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="parameter">The parameter the value should be set from.</param>
+            <param name="value">New value to set.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.SetSingleParameterDouble(System.IntPtr,System.IntPtr,System.Double)">
+            <summary>
+            Sets the parameter to a value on the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="parameter">The parameter the value should be set from.</param>
+            <param name="value">New value to set.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.SetSingleParameterInt32(System.IntPtr,System.IntPtr,System.Int32)">
+            <summary>
+            Sets the parameter to a value on the device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="parameter">The parameter the value should be set from.</param>
+            <param name="value">New value to set.</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.GetSingleParameter(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Returns the current value of the given parameter from device.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <param name="parameterIn">The parameter its value is asked for</param>
+            <param name="parameterOut">The new parameter, which must be freed with 'vsx_ReleaseParameter' function</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.ReleaseParameter(System.IntPtr)">
+            <summary>
+            Release parameter handle
+            </summary>
+            <param name="pParameter">Handle to parameter</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsParameterList.ReleaseParameterList(System.IntPtr)">
+            <summary>
+            Release parameter list handle
+            </summary>
+            <param name="pParameterList">Handle to parameter list</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExportsResult">
+            <summary>
+            Class collecting result functionality
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsResult.GetResultXml(System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Returns the complete xml response from an result inside data container
+            </summary>
+            <param name="dch">Handle to data container</param>
+            <param name="resultId">Name of result</param>
+            <param name="result">Returns complete result xml as string</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsResult.GetResultElementString(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Return certain value from a result inside data container
+            </summary>
+            <param name="dch">Handle to data container</param>
+            <param name="resultId">Name of result</param>
+            <param name="xPath">xPath defintion</param>
+            <param name="result">Return result as string</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsResult.GetResultElementInt32(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Return certain value from a result inside data container
+            </summary>
+            <param name="dch">Handle to data container</param>
+            <param name="resultId">Name of result</param>
+            <param name="xPath">xPath defintion</param>
+            <param name="result">Return result as int32</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsResult.GetResultElementInt64(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Return certain value from a result inside data container
+            </summary>
+            <param name="dch">Handle to data container</param>
+            <param name="resultId">Name of result</param>
+            <param name="xPath">xPath defintion</param>
+            <param name="result">Return result as int64</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsResult.GetResultElementDouble(System.IntPtr,System.IntPtr,System.IntPtr,System.IntPtr)">
+            <summary>
+            Return certain value from a result inside data container
+            </summary>
+            <param name="dch">Handle to data container</param>
+            <param name="resultId">Name of result</param>
+            <param name="xPath">xPath defintion</param>
+            <param name="result">Return result as double</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="T:PF.VsxProtocolDriver.Wrapper.VsxExportsStatusItemList">
+            <summary>
+            Class collecting status item list functionality
+            </summary>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsStatusItemList.GetAllDeviceStatusData(System.IntPtr,System.IntPtr)">
+            <summary>
+            Get the full status data set from device.
+            </summary>
+            <param name="vsx">handle to sensor</param>
+            <param name="statusItemListData">new handle to status data object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsStatusItemList.ReleaseStatusItemList(System.IntPtr)">
+            <summary>
+            Release / Free "VsxStatusItemList" handle
+            </summary>
+            <param name="pStatusItemList">handle to status item object</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsStatusItemList.RegisterOnDeviceStatusReceived(System.IntPtr,System.IntPtr)">
+            <summary>
+            Register callback for "vsx_OnDeviceStatusReceived" callback.
+            Only short execution times are allowed (do not block the function),
+            just use to transfer data to your (main) thread. 
+            </summary>
+            <param name="vsx">Handle to vsx sensor</param>
+            <param name="fptr">Function pointer to callback function</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsStatusItemList.DeregisterOnDeviceStatusReceived(System.IntPtr)">
+            <summary>
+            Function to deregister already existing callback function
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsStatusItemList.SubscribeToDeviceStatusData(System.IntPtr)">
+            <summary>
+            Subscribe status data from sensor to the client.
+            This will send regulary or in case of a problem status data to the client.
+            This need a registered callback for "vsx_OnDeviceStatusReceived".
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+        <member name="M:PF.VsxProtocolDriver.Wrapper.VsxExportsStatusItemList.UnsubscribeToDeviceStatusData(System.IntPtr)">
+            <summary>
+            Unsubscribe status data from sensor.
+            </summary>
+            <param name="vsx">Handle to sensor</param>
+            <returns>Returns VSX_STATUS_SUCCESS(0) on success</returns>
+        </member>
+    </members>
+</doc>
