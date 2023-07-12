@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<launch>
+  <node name="lidar" pkg="vsx_protocol_driver_ros" type="vte7500_driver_node">
+    <param name="auto_trigger_frame_rate" value="30" />
+    <param name="binning_mode" value="1" />
+    <param name="camera_mode" value="2" />
+    <param name="exposure_time" value="1000" />
+    <param name="flying_pixel_filter" value="true" />
+    <param name="frame" value="base_link" />
+    <param name="range_mode" value="2" />
+    <param name="spatial_filter" value="true" />
+  </node>
+</launch>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <library path="lib/libvsx_protocol_driver_ros">
-    <class type="vsx_protocol_driver_ros::Example"
-           name="vxs_protocol_driver_ros::Example"
+    <class type="vsx_protocol_driver_ros::Vte7500Driver"
+           name="vxs_protocol_driver_ros/Vte7500Driver"
            base_class_type="nodelet::Nodelet">
         <description>
             Read pointclouds from 3-D Time-of-Flight sensor VTE7500-F400-B12-A1500.

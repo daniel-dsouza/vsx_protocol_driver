@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(vsx_protocol_driver_ros)
 
 SET(COMMON_DEPS
+  dynamic_reconfigure
   nodelet
   pcl_conversions
   pcl_ros
@@ -83,7 +84,11 @@ find_package(catkin REQUIRED COMPONENTS
 # generate_dynamic_reconfigure_options(
 #   cfg/DynReconf1.cfg
 #   cfg/DynReconf2.cfg
-# )
+#
+
+generate_dynamic_reconfigure_options(
+  reconfigure/Vte7500Driver.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -114,11 +119,12 @@ include_directories(
 
 # nodelet library
 add_library(${PROJECT_NAME}
-  src/nodelets/example.cpp)
+  src/nodelets/vte7500_driver.cpp)
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
 add_dependencies(${PROJECT_NAME}
+  ${PROJECT_NAME}_gencfg
   # ${PROJECT_NAME}_gencpp
   ${catkin_EXPORTED_TARGETS}
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
@@ -128,10 +134,11 @@ set_target_properties(${PROJECT_NAME}
 )
 
 # node version of driver nodelet
-swri_nodelet_add_node(example_node ${PROJECT_NAME} Example)
-target_link_libraries(example_node ${PROJECT_NAME})
-set_target_properties(example_node PROPERTIES COMPILE_FLAGS "-std=c++17 -DPCL_NO_PRECOMPILE")
+swri_nodelet_add_node(vte7500_driver_node ${PROJECT_NAME} Vte7500Driver)
+target_link_libraries(vte7500_driver_node ${PROJECT_NAME})
+set_target_properties(vte7500_driver_node PROPERTIES COMPILE_FLAGS "-std=c++17 -DPCL_NO_PRECOMPILE")
 #add_dependencies(example_node ${PROJECT_NAME}_gencpp)
+add_dependencies(vte7500_driver_node ${PROJECT_NAME}_gencfg)
 
 #############
 ## Install ##
@@ -144,7 +151,7 @@ set_target_properties(example_node PROPERTIES COMPILE_FLAGS "-std=c++17 -DPCL_NO
 install(
   TARGETS
     ${PROJECT_NAME}
-    example_node
+    vte7500_driver_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -157,12 +164,12 @@ install(DIRECTORY include/${PROJECT_NAME}/
   PATTERN ".svn" EXCLUDE
 )
 
-## Mark other files for installation (e.g. launch and bag files, etc.)
-# install(FILES
-#   # myfile1
-#   # myfile2
-#   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-# )
+# Mark .launch files for installation.
+install(
+  DIRECTORY launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  FILES_MATCHING PATTERN "*.launch"
+)
 
 ## Install Plugin Definition File
 install(

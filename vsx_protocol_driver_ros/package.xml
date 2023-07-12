@@ -49,6 +49,7 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
 
+  <depend>dynamic_reconfigure</depend>
   <depend>nodelet</depend>
   <depend>pcl</depend>
   <depend>pcl_ros</depend>
