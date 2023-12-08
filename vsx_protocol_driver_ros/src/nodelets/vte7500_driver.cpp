@@ -1,6 +1,7 @@
-//
-// Created by ddsouza on 6/23/23.
-//
+/* 
+ * Use of this source code is governed by a BSD-style 
+ * license that can be found in the LICENSE file.
+ */
 
 #include "vsx_protocol_driver_ros/vte7500_driver.h"
 
@@ -408,6 +409,9 @@ void Vte7500Driver::run()
     std::vector<uint16_t> I;
     vsxImageToVec(linedatai, I);
 
+/*
+ * TODO: Figure out how to directly copy data into PCL point cloud.
+ */
 //  auto mapX = msg->getMatrixXfMap(1, 4,0);
 //  auto mapy = msg->getMatrixXfMap(1, 4,1);
 //  auto mapZ = msg->getMatrixXfMap(1, 4,2);

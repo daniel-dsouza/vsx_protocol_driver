@@ -1,6 +1,7 @@
-//
-// Created by ddsouza on 6/23/23.
-//
+/*
+ * Use of this source code is governed by a BSD-style 
+ * license that can be found in the LICENSE file.
+ */
 
 #ifndef VSX_PROTOCOL_DRIVER_ROS_VTE7500_DRIVER_H
 #define VSX_PROTOCOL_DRIVER_ROS_VTE7500_DRIVER_H
